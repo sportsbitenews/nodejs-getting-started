@@ -18,17 +18,17 @@ const utils = require(`nodejs-repo-tools`);
 
 const steps = [
   // Standard steps
-  require(`../1-hello-world/test/config`),
-  require(`../2-structured-data/test/config`),
-  require(`../3-binary-data/test/config`),
-  require(`../4-auth/test/config`),
-  require(`../5-logging/test/config`),
-  require(`../6-pubsub/test/config`),
-  require(`../7-gce/test/config`),
+  require(`../1-hello-world/test/_test-config`),
+  require(`../2-structured-data/test/_test-config`),
+  require(`../3-binary-data/test/_test-config`),
+  require(`../4-auth/test/_test-config`),
+  require(`../5-logging/test/_test-config`),
+  require(`../6-pubsub/test/_test-config`),
+  require(`../7-gce/test/_test-config`),
 
   // Worker steps
-  require(`../6-pubsub/test/config.worker`),
-  require(`../7-gce/test/config.worker`)
+  require(`../6-pubsub/test/_test-config.worker`),
+  require(`../7-gce/test/_test-config.worker`)
 ];
 
 function tryToFinish (numTests, steps, done) {
@@ -66,7 +66,7 @@ before((done) => {
   // Delete existing versions
   async.each(steps, (config, cb) => {
     console.log(`Deletion queued for version ${config.test}...`);
-    utils.deleteVersion(config.test, config.cwd, () => {
+    utils.deleteVersion(config, () => {
       console.log(`Deleted version ${config.test}!`);
       cb();
     });
@@ -75,11 +75,16 @@ before((done) => {
 
 it(`should deploy all steps`, (done) => {
   let numTests = steps.length;
-  async.eachLimit(steps, 5, (config, cb) => {
+  async.eachLimit(steps, 3, (config, cb) => {
+    config.tries = 3;
     utils.testDeploy(config, (err) => {
       config.err = err;
       config.done = true;
-      tryToFinish(numTests, steps, cb);
+
+      // Delete the deployment
+      utils.deleteVersion(config, () => {
+        tryToFinish(numTests, steps, cb);
+      });
     });
   }, done);
 });
