@@ -14,7 +14,7 @@
 'use strict';
 
 const async = require(`async`);
-const utils = require(`nodejs-repo-tools`);
+const utils = require(`@google-cloud/nodejs-repo-tools`);
 
 const steps = [
   // Standard steps
