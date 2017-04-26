@@ -66,10 +66,11 @@ before((done) => {
   // Delete existing versions
   async.each(steps, (config, cb) => {
     console.log(`Deletion queued for version ${config.test}...`);
-    utils.deleteVersion(config, () => {
-      console.log(`Deleted version ${config.test}!`);
-      cb();
-    });
+    utils.deleteVersion(config)
+      .then(() => {
+        console.log(`Deleted version ${config.test}!`);
+        cb();
+      });
   }, done);
 });
 
