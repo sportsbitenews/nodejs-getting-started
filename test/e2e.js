@@ -70,6 +70,10 @@ before((done) => {
       .then(() => {
         console.log(`Deleted version ${config.test}!`);
         cb();
+      })
+      .catch((err) => {
+        console.log(`Failed to delete version ${config.test}!`);
+        cb();
       });
   }, done);
 });
