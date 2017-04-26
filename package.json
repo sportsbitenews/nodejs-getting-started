@@ -73,7 +73,7 @@
   "devDependencies": {
     "ava": "~0.19.1",
     "mocha": "^3.2.0",
-    "nodejs-repo-tools": "git+https://git@github.com/ace-n/nodejs-repo-tools.git",
+    "@google-cloud/nodejs-repo-tools": "git+https://git@github.com/ace-n/nodejs-repo-tools.git",
     "proxyquire": "~1.7.11",
     "sinon": "~2.1.0",
     "supertest": "~3.0.0",
