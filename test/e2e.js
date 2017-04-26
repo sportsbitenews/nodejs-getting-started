@@ -29,7 +29,7 @@ const steps = [
   // Worker steps
   require(`../6-pubsub/test/_test-config.worker`),
   require(`../7-gce/test/_test-config.worker`)
-];
+].map((config) => Object.assign(config, { projectId: process.env.GCLOUD_PROJECT }));
 
 function tryToFinish (numTests, steps, done) {
   let doneCount = 0;
@@ -80,11 +80,7 @@ it(`should deploy all steps`, (done) => {
     utils.testDeploy(config, (err) => {
       config.err = err;
       config.done = true;
-
-      // Delete the deployment
-      utils.deleteVersion(config, () => {
-        tryToFinish(numTests, steps, cb);
-      });
+      tryToFinish(numTests, steps, cb);
     });
   }, done);
 });
