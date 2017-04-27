@@ -82,10 +82,15 @@ it(`should deploy all steps`, (done) => {
   let numTests = steps.length;
   async.eachLimit(steps, 3, (config, cb) => {
     config.tries = 3;
-    utils.testDeploy(config, (err) => {
-      config.err = err;
-      config.done = true;
-      tryToFinish(numTests, steps, cb);
-    });
+    utils.testDeploy(config)
+      .then(() => {
+        config.done = true;
+        tryToFinish(numTests, steps, cb);
+      })
+      .catch((err) => {
+       config.err = err;
+       config.done = true;
+       tryToFinish(numTests, steps, cb);
+     });
   }, done);
 });
