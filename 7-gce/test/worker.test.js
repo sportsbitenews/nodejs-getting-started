@@ -19,7 +19,7 @@ const proxyquire = require(`proxyquire`);
 const sinon = require(`sinon`);
 const supertest = require(`supertest`);
 const test = require(`ava`);
-const utils = require(`nodejs-repo-tools`);
+const utils = require(`@google-cloud/nodejs-repo-tools`);
 
 const projectId = process.env.GCLOUD_PROJECT;
 

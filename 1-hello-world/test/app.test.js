@@ -14,7 +14,7 @@
 'use strict';
 
 const testConfig = require(`./_test-config`);
-const utils = require(`nodejs-repo-tools`);
+const utils = require(`@google-cloud/nodejs-repo-tools`);
 const test = require(`ava`);
 
 if (!process.env.E2E_TESTS) {
