@@ -85,12 +85,14 @@ it(`should deploy all steps`, (done) => {
     utils.testDeploy(config)
       .then(() => {
         config.done = true;
-        tryToFinish(numTests, steps, cb);
       })
+      .then(() => {
+        utils.deleteVersion(config);
+      })
+      .then(cb)
       .catch((err) => {
-       config.err = err;
-       config.done = true;
-       tryToFinish(numTests, steps, cb);
-     });
-  }, done);
+         config.err = err;
+         config.done = true;
+       });
+  }, tryToFinish(numTests, steps, done));
 });
