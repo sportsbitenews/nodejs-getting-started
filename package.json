@@ -10,7 +10,8 @@
     "test": "npm run lint && npm run ava",
     "cover": "nyc --cache npm test; nyc report --reporter=html",
     "e2e": "mocha test/e2e.js -t 1800000",
-    "unify": "node scripts/unify"
+    "unify": "node scripts/unify",
+    "update-dependencies": "./scripts/update-dependencies.sh"
   },
   "author": "Google Inc.",
   "contributors": [
@@ -46,11 +47,11 @@
     "node": ">=4.3.2"
   },
   "dependencies": {
-    "@google-cloud/debug-agent": "~1.0.0",
-    "@google-cloud/trace-agent": "~1.0.4",
     "@google-cloud/datastore": "~1.0.0",
-    "@google-cloud/storage": "~1.1.0",
+    "@google-cloud/debug-agent": "~1.0.0",
     "@google-cloud/pubsub": "~0.10.0",
+    "@google-cloud/storage": "~1.1.0",
+    "@google-cloud/trace-agent": "~1.0.4",
     "async": "~2.3.0",
     "body-parser": "~1.17.1",
     "connect-memcached": "~0.2.0",
@@ -70,14 +71,12 @@
     "winston": "~2.3.1"
   },
   "devDependencies": {
+    "@google-cloud/nodejs-repo-tools": "^1.4.15",
     "ava": "~0.19.1",
-    "nodejs-repo-tools": "git+https://git@github.com/GoogleCloudPlatform/nodejs-repo-tools.git",
+    "npm-check-updates": "^2.12.1",
     "proxyquire": "~1.7.11",
     "sinon": "~2.1.0",
     "supertest": "~3.0.0",
     "tap-dot": "~1.0.5"
-  },
-  "engines": {
-    "node": ">=4.3.2"
   }
 }
