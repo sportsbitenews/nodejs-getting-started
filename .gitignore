@@ -7,5 +7,5 @@ test/encrypted/nodejs-docs-samples.json
 *.iml
 .idea/
 key.json
-*/yarn.lock
 .nyc_output
+repo-tools-cloudbuild.yaml
